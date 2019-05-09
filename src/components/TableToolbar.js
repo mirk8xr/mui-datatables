@@ -185,6 +185,7 @@ class TableToolbar extends React.Component {
               </span>
             </Tooltip>
           )}
+          {options.customToolbar && options.customToolbar()}
           {options.viewColumns && (
             <Popover
               refExit={this.setActiveIcon.bind(null)}
@@ -228,7 +229,6 @@ class TableToolbar extends React.Component {
               }
             />
           )}
-          {options.customToolbar && options.customToolbar()}
         </div>
       </Toolbar>
     );
