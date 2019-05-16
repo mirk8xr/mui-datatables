@@ -200,7 +200,7 @@ class TableFilter extends React.Component {
               <InputLabel htmlFor={column.name}>{column.label}</InputLabel>
               <Select
                 value={filterList[index].toString() || textLabels.all}
-                name={column.name}
+                name={(column.label) ? column.label : column.name}
                 onChange={event => this.handleDropdownChange(event, index)}
                 input={<Input name={column.name} id={column.name} />}>
                 <MenuItem value={textLabels.all} key={0}>
@@ -230,7 +230,7 @@ class TableFilter extends React.Component {
           column.filter ? (
             <FormControl className={classes.textFieldFormControl} key={index}>
               <TextField
-                label={column.name}
+                label={(column.label) ? column.label : column.name}
                 value={filterList[index].toString() || ''}
                 onChange={event => this.handleTextFieldChange(event, index)}
               />
@@ -256,7 +256,7 @@ class TableFilter extends React.Component {
                 multiple
                 value={filterList[index] || []}
                 renderValue={selected => selected.join(', ')}
-                name={column.name}
+                name={(column.label) ? column.label : column.name}
                 onChange={event => this.handleMultiselectChange(index, event.target.value)}
                 input={<Input name={column.name} id={column.name} />}>
                 {filterData[index].map((filterColumn, filterIndex) => (
