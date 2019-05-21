@@ -20,7 +20,7 @@
     "lint": "eslint src",
     "build": "cross-env NODE_ENV=production npm run prettier && rollup -c",
     "prepare": "npm run build",
-    "postinstall": "npm install && npm run build"
+    "install": "npm run build"
   },
   "repository": {
     "type": "git",
