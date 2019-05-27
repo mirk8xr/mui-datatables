@@ -190,7 +190,7 @@ class MUIDataTable extends React.Component {
   initializeTable(props) {
     this.getDefaultOptions(props);
     this.setTableOptions(props);
-    this.setTableData(props, TABLE_LOAD.INITIAL);
+    this.setTableData(props, TABLE_LOAD.INITIAL, () => {this.setTableAction('init');});
   }
 
   /*

@@ -83,6 +83,10 @@ class Example extends React.Component {
       isRowSelectable: (dataIndex) => {
         //prevents selection of row with title "Attorney"
         return data[dataIndex][1] != "Attorney";
+      },
+      onTableChange: (action, tableState) => {
+        console.log(action);
+        console.log(tableState);
       }
     };
 

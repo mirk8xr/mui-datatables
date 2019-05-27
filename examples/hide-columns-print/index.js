@@ -13,7 +13,7 @@ class Example extends React.Component {
           filter: true,
           display: 'excluded',
         }
-      },      
+      },
       {
         label: "Modified Title Label",
         name: "Title",
@@ -33,6 +33,7 @@ class Example extends React.Component {
         options: {
           filter: true,
           print: false,
+          sortDirection: 'desc'
         }
       },
       {
@@ -41,7 +42,7 @@ class Example extends React.Component {
           filter: true,
           sort: false
         }
-      }      
+      }
     ];
 
 
@@ -82,6 +83,10 @@ class Example extends React.Component {
       filter: true,
       filterType: 'dropdown',
       responsive: 'scroll',
+      onTableChange: (action, tableState) => {
+        console.log(action);
+        console.log(tableState);
+      }
     };
 
     return (
