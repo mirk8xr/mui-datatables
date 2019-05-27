@@ -102,6 +102,7 @@ class MUIDataTable extends React.Component {
       selectableRows: PropTypes.bool,
       isRowSelectable: PropTypes.func,
       serverSide: PropTypes.bool,
+      onTableInit: PropTypes.func,
       onTableChange: PropTypes.func,
       caseSensitive: PropTypes.bool,
       rowHover: PropTypes.bool,
@@ -181,6 +182,11 @@ class MUIDataTable extends React.Component {
   }
 
   componentDidUpdate() {
+    if (this.props.data !== prevProps.data || this.props.columns !== prevProps.columns) {
+      this.setTableData(this.props, TABLE_LOAD.INITIAL, () => {
+        this.setTableInit('tablePropsUpdated');
+      });
+    }
     if (this.options.resizableColumns) {
       this.setHeadResizeable(this.headCellRefs, this.tableRef);
       this.updateDividers();
@@ -190,9 +196,9 @@ class MUIDataTable extends React.Component {
   initializeTable(props) {
     this.getDefaultOptions(props);
     this.setTableOptions(props);
-    this.setTableData(props, TABLE_LOAD.INITIAL
-        //() => {this.setTableAction('init');}
-    );
+    this.setTableData(props, TABLE_LOAD.INITIAL, () => {
+      this.setTableInit('tableLoadInitial');
+    });
   }
 
   /*
@@ -247,6 +253,12 @@ class MUIDataTable extends React.Component {
   setTableAction = action => {
     if (typeof this.options.onTableChange === 'function') {
       this.options.onTableChange(action, this.state);
+    }
+  };
+
+  setTableInit = action => {
+    if (typeof this.options.onTableInit === 'function') {
+      this.options.onTableInit(action, this.state);
     }
   };
 
