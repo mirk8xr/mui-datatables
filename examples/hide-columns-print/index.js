@@ -86,6 +86,10 @@ class Example extends React.Component {
       onTableChange: (action, tableState) => {
         console.log(action);
         console.log(tableState);
+      },
+      onTableInit: (action, tableState) => {
+        console.log(action);
+        console.log(tableState);
       }
     };
 

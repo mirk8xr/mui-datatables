@@ -181,12 +181,13 @@ class MUIDataTable extends React.Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.props.data !== prevProps.data || this.props.columns !== prevProps.columns) {
       this.setTableData(this.props, TABLE_LOAD.INITIAL, () => {
-        this.setTableInit('tablePropsUpdated');
+        this.setTableAction('propsUpdate');
       });
     }
+
     if (this.options.resizableColumns) {
       this.setHeadResizeable(this.headCellRefs, this.tableRef);
       this.updateDividers();
@@ -197,7 +198,7 @@ class MUIDataTable extends React.Component {
     this.getDefaultOptions(props);
     this.setTableOptions(props);
     this.setTableData(props, TABLE_LOAD.INITIAL, () => {
-      this.setTableInit('tableLoadInitial');
+      this.setTableInit('tableInitialized');
     });
   }
 
