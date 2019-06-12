@@ -17,7 +17,7 @@ const defaultSearchStyles = theme => ({
     marginRight: '8px',
   },
   searchText: {
-    flex: '0.8 0',
+    flex: '1 0',
   },
   clearIcon: {
     '&:hover': {
@@ -28,13 +28,13 @@ const defaultSearchStyles = theme => ({
 
 class TableSearch extends React.Component {
   handleTextChange = event => {
-    const { onSearchChange } = this.props.options;
-
-    if (onSearchChange) {
-      onSearchChange(event.target.value);
+    const { onSearchChange, performSearchOnEnterKey } = this.props.options;
+    if (!performSearchOnEnterKey) {
+      if (onSearchChange) {
+        onSearchChange(event.target.value);
+      }
+      this.props.onSearch(event.target.value);
     }
-
-    this.props.onSearch(event.target.value);
   };
 
   componentDidMount() {
@@ -46,8 +46,12 @@ class TableSearch extends React.Component {
   }
 
   onKeyDown = event => {
+    const { performSearchOnEnterKey } = this.props.options;
     if (event.keyCode === 27) {
       this.props.onHide();
+    }
+    if (event.keyCode === 13 && performSearchOnEnterKey) {
+      this.props.onSearch(event.target.value);
     }
   };
 
@@ -60,7 +64,7 @@ class TableSearch extends React.Component {
           <SearchIcon className={classes.searchIcon} />
           <TextField
             className={classes.searchText}
-            autoFocus={true}
+            autoFocus={this.props.options.searchWithFocusIfVisible ? this.props.options.searchWithFocusIfVisible : true}
             InputProps={{
               'aria-label': options.textLabels.toolbar.search,
             }}

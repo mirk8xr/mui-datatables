@@ -84,13 +84,20 @@ class Example extends React.Component {
       filterType: 'dropdown',
       responsive: 'scroll',
       onTableChange: (action, tableState) => {
-        console.log(action);
-        console.log(tableState);
+        // console.log(action);
+        // console.log(tableState);
       },
       onTableInit: (action, tableState) => {
-        console.log(action);
-        console.log(tableState);
-      }
+        // console.log(action);
+        // console.log(tableState);
+      },
+      search: true,
+      searchVisible: true,
+      searchWithFocusIfVisible: true,
+      handleCustomSearch: text => {
+        console.log(text);
+      },
+      /*performSearchOnEnterKey: true*/
     };
 
     return (

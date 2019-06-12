@@ -81,7 +81,7 @@ export const responsiveToolbarStyles = theme => ({
 class TableToolbar extends React.Component {
   state = {
     iconActive: null,
-    showSearch: false,
+    showSearch: this.props.options.searchVisible || false,
   };
 
   handleCSVDownload = () => {

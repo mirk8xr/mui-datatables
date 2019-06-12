@@ -117,6 +117,10 @@ class MUIDataTable extends React.Component {
       customSort: PropTypes.func,
       customSearch: PropTypes.func,
       search: PropTypes.bool,
+      searchVisible: PropTypes.bool,
+      searchWithFocusIfVisible: PropTypes.bool,
+      handleCustomSearch: PropTypes.func,
+      performSearchOnEnterKey: PropTypes.bool,
       print: PropTypes.bool,
       viewColumns: PropTypes.bool,
       download: PropTypes.bool,
@@ -134,6 +138,8 @@ class MUIDataTable extends React.Component {
     options: {},
     data: [],
     columns: [],
+    searchVisible: false,
+    performSearchOnEnterKey: false,
   };
 
   state = {
@@ -725,18 +731,22 @@ class MUIDataTable extends React.Component {
   };
 
   searchTextUpdate = text => {
-    this.setState(
-      prevState => ({
-        searchText: text && text.length ? text : null,
-        page: 0,
-        displayData: this.options.serverSide
-          ? prevState.displayData
-          : this.getDisplayData(prevState.columns, prevState.data, prevState.filterList, text),
-      }),
-      () => {
-        this.setTableAction('search');
-      },
-    );
+    if (this.props.options.handleCustomSearch) {
+      this.props.options.handleCustomSearch(text);
+    } else {
+      this.setState(
+        prevState => ({
+          searchText: text && text.length ? text : null,
+          page: 0,
+          displayData: this.options.serverSide
+            ? prevState.displayData
+            : this.getDisplayData(prevState.columns, prevState.data, prevState.filterList, text),
+        }),
+        () => {
+          this.setTableAction('search');
+        },
+      );
+    }
   };
 
   resetFilters = () => {
