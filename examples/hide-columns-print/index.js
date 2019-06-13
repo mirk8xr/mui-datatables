@@ -93,7 +93,7 @@ class Example extends React.Component {
       },
       search: true,
       searchVisible: true,
-      searchWithFocusIfVisible: true,
+      searchWithFocusIfVisible: false,
       searchInputPlaceholder: 'Type username or email'
       /*handleCustomSearch: text => {
         console.log(text);
