@@ -94,7 +94,8 @@ class Example extends React.Component {
       search: true,
       searchVisible: true,
       searchWithFocusIfVisible: true,
-      handleCustomSearch: text => {
+      searchInputPlaceholder: 'Type username'
+      /*handleCustomSearch: text => {
         console.log(text);
       },
       /*performSearchOnEnterKey: true*/

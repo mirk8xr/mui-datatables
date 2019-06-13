@@ -64,6 +64,7 @@ class TableSearch extends React.Component {
           <SearchIcon className={classes.searchIcon} />
           <TextField
             className={classes.searchText}
+            placeholder={this.props.options.searchInputPlaceholder ? this.props.options.searchInputPlaceholder : ''}
             autoFocus={this.props.options.searchWithFocusIfVisible ? this.props.options.searchWithFocusIfVisible : true}
             InputProps={{
               'aria-label': options.textLabels.toolbar.search,
