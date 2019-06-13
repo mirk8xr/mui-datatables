@@ -20,8 +20,8 @@ const defaultSearchStyles = theme => ({
     flex: '1 0',
     minWidth: 160,
     '& input': {
-      fontSize: 14
-    }
+      fontSize: 14,
+    },
   },
   clearIcon: {
     '&:hover': {
