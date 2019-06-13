@@ -22,6 +22,10 @@ const defaultSearchStyles = theme => ({
     '& input': {
       fontSize: 14,
     },
+    '& p': {
+      marginTop: 4,
+      fontSize: 11,
+    },
   },
   clearIcon: {
     '&:hover': {
@@ -69,6 +73,7 @@ class TableSearch extends React.Component {
           <TextField
             className={classes.searchText}
             placeholder={this.props.options.searchInputPlaceholder ? this.props.options.searchInputPlaceholder : ''}
+            helperText={this.props.options.searchInputHelperText ? this.props.options.searchInputHelperText : ''}
             autoFocus={
               this.props.options.searchWithFocusIfVisible === undefined
                 ? true

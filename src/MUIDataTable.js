@@ -120,6 +120,7 @@ class MUIDataTable extends React.Component {
       searchVisible: PropTypes.bool,
       searchWithFocusIfVisible: PropTypes.bool,
       searchInputPlaceholder: PropTypes.string,
+      searchInputHelperText: PropTypes.string,
       handleCustomSearch: PropTypes.func,
       performSearchOnEnterKey: PropTypes.bool,
       print: PropTypes.bool,
