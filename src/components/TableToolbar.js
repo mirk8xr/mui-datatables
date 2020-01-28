@@ -79,9 +79,11 @@ export const responsiveToolbarStyles = theme => ({
 });
 
 class TableToolbar extends React.Component {
+
   state = {
     iconActive: null,
     showSearch: this.props.options.searchVisible || false,
+    searchText: ''
   };
 
   handleCSVDownload = () => {
@@ -92,8 +94,12 @@ class TableToolbar extends React.Component {
   setActiveIcon = iconName => {
     this.setState(() => ({
       iconActive: iconName,
-      showSearch: iconName === 'search' ? this.showSearch() : false,
-    }));
+      showSearch: ((iconName === 'search' || this.state.showSearch) ? true : false)
+    }), function() {
+      if (iconName === 'search') {
+        this.showSearch();
+      }
+    });
   };
 
   getActiveIcon = (styles, iconName) => {
@@ -110,7 +116,7 @@ class TableToolbar extends React.Component {
     const { onSearchClose } = this.props.options;
 
     if (onSearchClose) onSearchClose();
-    this.props.searchTextUpdate(null);
+    this.searchTextChange(null);
 
     this.setState(() => ({
       iconActive: null,
@@ -120,6 +126,18 @@ class TableToolbar extends React.Component {
     this.searchButton.focus();
   };
 
+  searchTextChange = (s) => {
+    this.setState(() => ({
+      searchText: s
+    }), function() {
+      this.props.searchTextUpdate(s);
+    });
+  }
+
+  filterUpdate = (index, value, component) => {
+    this.props.filterUpdate(index, value, component);
+  }
+
   render() {
     const {
       data,
@@ -128,9 +146,7 @@ class TableToolbar extends React.Component {
       columns,
       filterData,
       filterList,
-      filterUpdate,
       resetFilters,
-      searchTextUpdate,
       toggleViewColumn,
       title,
       tableRef,
@@ -143,7 +159,7 @@ class TableToolbar extends React.Component {
       <Toolbar className={classes.root} role={'toolbar'} aria-label={'Table Toolbar'}>
         <div className={classes.left}>
           {showSearch === true ? (
-            <TableSearch onSearch={searchTextUpdate} onHide={this.hideSearch} options={options} />
+            <TableSearch onSearch={this.searchTextChange} onHide={this.hideSearch} options={options} />
           ) : (
             <div className={classes.titleRoot} aria-hidden={'true'}>
               <Typography variant="h6" className={classes.titleText}>
@@ -223,7 +239,7 @@ class TableToolbar extends React.Component {
                   options={options}
                   filterList={filterList}
                   filterData={filterData}
-                  onFilterUpdate={filterUpdate}
+                  onFilterUpdate={this.filterUpdate}
                   onFilterReset={resetFilters}
                 />
               }

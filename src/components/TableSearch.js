@@ -35,6 +35,7 @@ const defaultSearchStyles = theme => ({
 });
 
 class TableSearch extends React.Component {
+
   handleTextChange = event => {
     const { onSearchChange, performSearchOnEnterKey } = this.props.options;
     if (!performSearchOnEnterKey) {
