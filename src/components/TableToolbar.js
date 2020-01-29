@@ -79,11 +79,10 @@ export const responsiveToolbarStyles = theme => ({
 });
 
 class TableToolbar extends React.Component {
-
   state = {
     iconActive: null,
     showSearch: this.props.options.searchVisible || false,
-    searchText: ''
+    searchText: '',
   };
 
   handleCSVDownload = () => {
@@ -92,14 +91,17 @@ class TableToolbar extends React.Component {
   };
 
   setActiveIcon = iconName => {
-    this.setState(() => ({
-      iconActive: iconName,
-      showSearch: ((iconName === 'search' || this.state.showSearch) ? true : false)
-    }), function() {
-      if (iconName === 'search') {
-        this.showSearch();
-      }
-    });
+    this.setState(
+      () => ({
+        iconActive: iconName,
+        showSearch: iconName === 'search' || this.state.showSearch ? true : false,
+      }),
+      function() {
+        if (iconName === 'search') {
+          this.showSearch();
+        }
+      },
+    );
   };
 
   getActiveIcon = (styles, iconName) => {
@@ -126,17 +128,20 @@ class TableToolbar extends React.Component {
     this.searchButton.focus();
   };
 
-  searchTextChange = (s) => {
-    this.setState(() => ({
-      searchText: s
-    }), function() {
-      this.props.searchTextUpdate(s);
-    });
-  }
+  searchTextChange = s => {
+    this.setState(
+      () => ({
+        searchText: s,
+      }),
+      function() {
+        this.props.searchTextUpdate(s);
+      },
+    );
+  };
 
   filterUpdate = (index, value, component) => {
     this.props.filterUpdate(index, value, component);
-  }
+  };
 
   render() {
     const {
